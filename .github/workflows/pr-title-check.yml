@@ -18,7 +18,7 @@ jobs:
           node-version: 14
 
       - name: Install dependencies
-        run: npm i @actions/core @actions/github
+        run: npm ci
 
       - name: Run PR title check
         run: node check-pr-title.js
