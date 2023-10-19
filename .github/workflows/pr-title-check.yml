@@ -4,7 +4,10 @@ on:
   pull_request:
     types:
       - opened
+      - edited
       - synchronize
+      - labeled
+      - unlabeled
 
 jobs:
   pr_title_check:
@@ -29,6 +32,7 @@ jobs:
           const prTitle = require(process.env.GITHUB_EVENT_PATH).pull_request.title;
           
           if (!new RegExp(regex).test(prTitle)) {
+            console.log(prTitle)
             console.error("PR title does not match the required pattern");
             process.exit(1);
           }
