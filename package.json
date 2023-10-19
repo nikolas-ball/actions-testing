@@ -1,8 +1,8 @@
 {
     "name": "actions-testing",
     "version": "1.0.0",
-    "description": "Your repository description",
-    "main": "index.js",
+    "description": "",
+    "main": "check-pr-title.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1"
     },
