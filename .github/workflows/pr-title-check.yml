@@ -1,4 +1,5 @@
-name: PR Title Check
+name: PR Title Checker
+
 on:
   pull_request:
     types:
@@ -8,19 +9,25 @@ on:
 jobs:
   pr_title_check:
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Setup Node.js
+      
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 14
-
+      
       - name: Install dependencies
-        run: npm install
-
+        run: npm ci
+      
       - name: Run PR title check
-        run: node check-pr-title.js
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          const regex = /d2m|D2M|M2D|master to dev|dev2master|Dev to master|dev to master|[A-Za-z]+/ \[[^\]]*\](\s([A-Za-z]+\s)+)\([^)]*\)/i;
+          const prTitle = process.env.GITHUB_HEAD_REF;
+          
+          if (!regex.test(prTitle)) {
+            console.error('PR title does not match the required pattern');
+            process.exit(1);
+          }
