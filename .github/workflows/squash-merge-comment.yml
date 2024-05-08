@@ -6,6 +6,10 @@ on:
 jobs:
   comment:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
     steps:
       - uses: actions/github-script@v6
         with:
@@ -14,5 +18,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `## Friendly Reminder: don't squash merge into /master, instead use noraml merge! 😄 <br/><br/> ![no squash merge on master](https://user-images.githubusercontent.com/17097025/160581061-d6e29c7f-8ed4-44d0-8d64-872d836a9647.png)`
+              body: `## Friendly Reminder: don't squash merge into /master, instead use normal merge! 😄 <br/><br/> ![no squash merge on master](https://user-images.githubusercontent.com/17097025/160581061-d6e29c7f-8ed4-44d0-8d64-872d836a9647.png)`
             })
